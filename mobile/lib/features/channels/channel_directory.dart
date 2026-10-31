@@ -55,12 +55,6 @@ class ChannelDirectoryLoadNotifier extends Notifier<ChannelDirectoryLoadState> {
     status: ChannelDirectoryLoadStatus.loading,
   );
 
-  /// Marks the directory as eligible for a fresh request.
-  void markIdle(String scope) => state = ChannelDirectoryLoadState(
-    scope: scope,
-    status: ChannelDirectoryLoadStatus.idle,
-  );
-
   /// Marks the directory as successfully loaded.
   void markLoaded(String scope) => state = ChannelDirectoryLoadState(
     scope: scope,

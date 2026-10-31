@@ -1062,21 +1062,6 @@ class ChannelsNotifier extends AsyncNotifier<List<Channel>> {
     return _channelFromMeta(latest, data, isMember: false);
   }
 
-  /// Loads the directory when Browse channels opens after startup or an error.
-  Future<void> ensureDirectoryLoaded() async {
-    final directoryState = ref.read(channelDirectoryLoadStatusProvider);
-    final scope = channelDirectoryScope(
-      ref.read(relayConfigProvider).baseUrl,
-      ref.read(myPubkeyProvider),
-    );
-    if (directoryState.scope == scope &&
-        (directoryState.status == ChannelDirectoryLoadStatus.loading ||
-            directoryState.status == ChannelDirectoryLoadStatus.loaded)) {
-      return;
-    }
-    await retryDirectory();
-  }
-
   /// Retries channel discovery while retaining the current channel list.
   Future<void> retryDirectory() async {
     final previousChannels = state.value;
